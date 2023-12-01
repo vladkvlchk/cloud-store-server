@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: String(process.env.DB_HOST),
@@ -22,7 +23,6 @@ import { ConfigModule } from '@nestjs/config';
     }),
     UsersModule,
     FilesModule,
-    CorsModule({ origin: '*' }),
   ],
   controllers: [AppController],
   providers: [AppService],
