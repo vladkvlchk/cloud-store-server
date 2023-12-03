@@ -19,11 +19,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { fileStorage } from './storage';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { UserId } from 'src/decorators/user-id.decorator';
-
-export enum FileType {
-  PHOTOS = 'photos',
-  TRASH = 'trash',
-}
+import { FileType } from './entities/file.entity';
 
 @Controller('files')
 @ApiTags('files')
@@ -65,5 +61,11 @@ export class FilesController {
     @UserId() userId: number,
   ) {
     return this.filesService.create(file, userId);
+  }
+
+  @Delete()
+  remove(@UserId() userId: number, @Query('id') ids: string){
+    //files?ids=1,2,7,8
+    return this.filesService.remove(userId, ids)
   }
 }
