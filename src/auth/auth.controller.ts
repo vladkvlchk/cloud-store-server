@@ -10,11 +10,11 @@ import { LocalAuthGuard } from './guards/local.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService){}
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
+  // @UseGuards(LocalAuthGuard)
   @ApiBody({type: CreateUserDto})
   async login(@Request() req) {
-    return this.authService.login(req.user as UserEntity);
+    return this.authService.login(req.body as UserEntity);
   }
 
   @Post('register')
